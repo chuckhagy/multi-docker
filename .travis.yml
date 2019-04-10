@@ -18,3 +18,16 @@ after_success:
   - docker push chuckhagy/multi-nginx
   - docker push chuckhagy/multi-server
   - docker push chuckhagy/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-west-1-185004247891
+  bucket_path: docker_multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+      secure: $AWS_SECRET_KEY
